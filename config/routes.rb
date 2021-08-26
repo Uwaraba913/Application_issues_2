@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post 'unfollow/:id' => 'relationships#unfollow', as: 'unfollow'
   get 'followings/:id' => 'relationships#followings', as: 'followings'
   get 'followers/:id' => 'relationships#followers', as: 'followers'
+  get '/search', to: 'seaches#search'
 
   resources :books do
     resources :book_comments, only: [:create, :destroy]
