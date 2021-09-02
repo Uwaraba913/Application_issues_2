@@ -4,11 +4,12 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @new_book = Book.new
+    impressionist(@book, nil, unique: [:ip_address])
     @book_comment = BookComment.new
   end
 
   def index
-    @books = Book.all
+    @books = Book.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
     @book = Book.new
   end
 
