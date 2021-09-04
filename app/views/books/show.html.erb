@@ -26,6 +26,17 @@
 
           <td>コメント数: <%= @book.book_comments.count %></td>
           <td>閲覧数: <%= @book.impressions_count %></td>
+          <td>
+            <div id="star-rate-<%= @book.id %>"></div>
+            <script>
+              $('#star-rate-<%= @book.id %>').raty({
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                readOnly: true,
+                score: <%= @book.rate %>,
+              });
+            </script>
+          </td>
 
           <% if @book.user == current_user %>
           <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
