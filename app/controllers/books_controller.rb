@@ -9,7 +9,13 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
+    if params[:latest]
+      @books = Book.latest
+    elsif params[:high_rate]
+      @books = Book.high_rate
+    else
+      @books = Book.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
+    end
     @book = Book.new
   end
 
@@ -48,7 +54,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :rate)
+    params.require(:book).permit(:title, :body, :category, :rate)
   end
 
   def check_user
