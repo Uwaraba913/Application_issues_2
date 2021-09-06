@@ -13,6 +13,9 @@ class BooksController < ApplicationController
       @books = Book.latest
     elsif params[:high_rate]
       @books = Book.high_rate
+    elsif params[:category_tag]
+      @book = Book.find(params[:id])
+      @books = Book.where(category: @book.category)
     else
       @books = Book.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}
     end

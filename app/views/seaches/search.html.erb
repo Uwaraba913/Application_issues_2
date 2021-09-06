@@ -29,6 +29,7 @@
           <th>User</th>
           <th>Title</th>
           <th>Opinion</th>
+          <th>Category</th>
           <th>Link</th>
         </tr>
       </thead>
@@ -39,10 +40,36 @@
           <td><%= attachment_image_tag(book.user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
           <td><%= book.title %></td>
           <td><%= book.body %></td>
+          <td><%= book.category %></td>
+          <td><%= link_to "Show", book_path(book) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% elsif @model == 'category'%>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Title</th>
+          <th>Opinion</th>
+          <th>Category</th>
+          <th>Link</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @records.each do |book| %>
+        <tr>
+          <td><%= attachment_image_tag(book.user, :profile_image, :fill, 50, 50, fallback: "no-image-icon.jpg") %></td>
+          <td><%= book.title %></td>
+          <td><%= book.body %></td>
+          <td><%= book.category %></td>
           <td><%= link_to "Show", book_path(book) %></td>
         </tr>
         <% end %>
       </tbody>
     </table>
   <% end %>
+
 
